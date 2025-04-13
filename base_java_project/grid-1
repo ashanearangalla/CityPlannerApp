@@ -21,5 +21,5 @@ swampy,height-limit=19
 flat,contamination,height-limit=19
 swampy,contamination
 swampy
-swampy
+flat
 swampy,flood-risk=78.161581

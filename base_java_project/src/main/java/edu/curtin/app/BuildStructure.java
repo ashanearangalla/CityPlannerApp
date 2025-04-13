@@ -16,7 +16,7 @@ public class BuildStructure {
 
     public void BuildStructureFromGrid(List<List<GridSquare>> grid) {
         Scanner scanner = new Scanner(System.in);
-
+        System.out.println("\nBuild Structure");
         System.out.print("Enter row: ");
         int row = Integer.parseInt(scanner.nextLine());
 
@@ -37,9 +37,9 @@ public class BuildStructure {
         Structure structure = BuildStructureOnGridSquare(square, floors, foundation, material);
 
         if (!structure.isBuildable()) {
-            System.out.println("Cannot build: " + structure.getReason());
+            System.out.println("\nCannot build: " + structure.getReason()+ "\n");
         } else {
-            System.out.printf("Structure can be built. Total cost: $%,.2f\n", structure.getCost());
+            System.out.printf("\nStructure can be built. Total cost: $%,.2f\n", structure.getCost());
         }
     }
 

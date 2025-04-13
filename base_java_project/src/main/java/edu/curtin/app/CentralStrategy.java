@@ -11,24 +11,76 @@ import java.util.List;
  * @author Ashane
  */
 public class CentralStrategy implements BuildCityStrategy{
+    List<List<GridSquare>> grid;
+    private int totalStructures;
+    private double totalCost;
     
-    public CentralStrategy() {
-        
+    public CentralStrategy(List<List<GridSquare>> grid) {
+        this.grid = grid;
     }
 
     @Override
     public void totalNumberOfStructures() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        BuildStructure builder = new BuildStructure();
+        
+        int height = grid.size();
+        int width = grid.get(0).size();
+        
+        double centerX = (height -1)/ 2.0;
+        double centerY = (width -1) /2.0;
+        
+        for(int i =0; i< height; i++) {
+            List<GridSquare> row = grid.get(i);
+            for(int j =0; j<width; j++) {
+                GridSquare square = row.get(j);
+                
+                double distance = Math.sqrt(Math.pow(i - centerX, 2) + Math.pow(j - centerY, 2)) ;
+                int nFloors = (int) Math.round( 1 + 20 / (distance +1));
+                
+                String material;
+                if(distance <= 2) {
+                    material = "concrete";
+                }
+                else if(2 < distance && distance <= 4) {
+                    material = "brick";
+                }
+                else if(4 < distance && distance <= 6) {
+                    material = "stone";
+                }
+                else {
+                    material = "wood";
+                }
+                
+                String foundation = "slab";
+                Structure structure = builder.BuildStructureOnGridSquare(square, nFloors, foundation, material);
+                
+                if (!structure.isBuildable()) {
+                    square.setBuildable(false);
+                    
+                } else {
+                    square.setBuildable(true);
+                    square.setFloors(nFloors);
+                    square.setMaterial(material);
+                    totalCost += structure.getCost();
+                    totalStructures++;
+                    
+                }
+                
+            }
+        }
+        System.out.printf("Total structures can be built: %d\n", totalStructures);
     }
 
     @Override
     public void totalCost() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.printf("Total cost: $%,.2f\n", totalCost);
+      
     }
 
     @Override
     public List<List<GridSquare>> structuresCanBeBuilt() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return grid;
     }
+    
     
 }

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * Entry point into the application. To chane the package, and/or the name of this class, make
- * sure to update the 'mainClass = ...' line in build.gradle.
+ * sure to update the 'minClass = ...' line in build.gradle.
  */
 public class CityPlanningApp
 {
@@ -61,7 +61,7 @@ public class CityPlanningApp
                         zoningSummary.append("L").append(zoningRules.get("height-limit")).append(" ");
                     }
                     if(zoningRules.containsKey("contamination")){
-                        zoningSummary.append("C").append(" ");
+                        zoningSummary.append("C");
                     }
                     System.out.printf("| %-11s |", zoningSummary.toString());
                         
@@ -90,8 +90,9 @@ public class CityPlanningApp
         boolean done = false;
         while(!done){
             System.out.println(
-            "\nMenu \n(a)Build Structure \n(b)Build City \n(c)Configure \n(d)Quit \nChoose an option : "
+            "\nMenu \n(a)Build Structure \n(b)Build City \n(c)Configure \n(d)Quit"
             );
+            System.out.print("\nChoose an option : ");
             String opt = sc.nextLine();
             switch(opt) {
                 case "a":
@@ -109,11 +110,13 @@ public class CityPlanningApp
 
                 case "c":
                     System.out.println(
-                    "\nConfigure \n(a)Uniform \n(b)Random \n(c)Central \nChoose an option: "
+                    "\nConfigure \n(a)Uniform \n(b)Random \n(c)Central"
                     );
+                    System.out.print("\nChoose an option: ");
                     String option = sc.nextLine();
                     switch (option) {
                         case "a":
+                            
                             System.out.print("Number of floors: ");
                             int floors = Integer.parseInt(sc.nextLine());
 
@@ -128,6 +131,12 @@ public class CityPlanningApp
                         case "b":
                             buildCity.setStrategy(new RandomStrategy(grid));
                             break;
+                        case "c":
+                            buildCity.setStrategy(new CentralStrategy(grid));
+                            break;
+                        default:
+                            System.out.printf("Invalid Configuration '%s'.\n", option);
+                            
                     }
                     break;
 
