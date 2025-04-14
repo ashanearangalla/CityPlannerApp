@@ -14,38 +14,117 @@ import java.util.Scanner;
  */
 public class BuildStructure {
 
-    public void BuildStructureFromGrid(List<List<GridSquare>> grid) {
+    public void buildStructurePrompt(List<List<GridSquare>> grid) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\nBuild Structure");
-        System.out.print("Enter row: ");
-        int row = Integer.parseInt(scanner.nextLine());
+        
+        System.out.println("\n\nBuild Structure\n");
+        int row, col, floors;
+        String foundation, material;
+        while(true) {
+            System.out.print("Enter row: ");
+            String input = scanner.nextLine();
+            
+            try {
+                row = Integer.parseInt(input);
+                if(row > 0 && row <= grid.size()) {
+                    break;
+                } else {
+                    System.out.println("\nError: row must be between 1 to " + (grid.size()) + ")!\n");
+                }
+                
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid Integer!\n");
+            }
+        }
+        
+        while(true) {
+            System.out.print("Enter column: ");
+            String input = scanner.nextLine();
+            
+            try {
+                col = Integer.parseInt(input);
+                if(col > 0 && col <= grid.get(0).size()) {
+                    break;
+                } else {
+                    System.out.println("\nError: column must be between 1 to " + (grid.get(0).size()) + ")!\n");
+                }
+                
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid Integer!\n");
+            }
+        }
 
-        System.out.print("Enter column: ");
-        int col = Integer.parseInt(scanner.nextLine());
+        while(true) {
+            System.out.print("Number of floors: ");
+            String input = scanner.nextLine();
+            
+            try {
+                floors = Integer.parseInt(input);
+                if(floors > 0 && floors<= 100) {
+                    break;
+                } else {
+                    System.out.println("\nError: floors must be between 1 to 100\n");
+                }
+                
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid Integer\n");
+            }
+        }
 
-        System.out.print("Number of floors: ");
-        int floors = Integer.parseInt(scanner.nextLine());
+        
+        while(true) {
+            System.out.print("Foundation type \n(a)slab \n(b)stilts \nChoose option: ");
+            String input = scanner.nextLine();
+            switch(input) {
+                case "a":
+                    foundation = "slab";
+                    break;
+                case "b":
+                    foundation = "stilts";
+                    break;
+                default:
+                    System.out.println("\nInvalid foundation type. Please choose a or b!\n");
+                    continue;
+            }
+            break;
+        }
 
-        System.out.print("Foundation type (slab/stilts): ");
-        String foundation = scanner.nextLine();
+        while(true) {
+            System.out.print("Material type \n(a)wood \n(b)stone \n(c)brick \n(d)concrete \nChoose option: ");
+            String input = scanner.nextLine();
+            switch(input) {
+                case "a":
+                    material = "wood";
+                    break;
+                case "b":
+                    material = "stone";
+                    break;
+                case "c":
+                    material= "brick";
+                    break;
+                case "d":
+                    material= "concrete";
+                    break;
+                default:
+                    System.out.println("\nInvalid material type. Please choose a ,b ,c or d!\n");
+                    continue;
+            }
+            break;
+        }
 
-        System.out.print("Material (wood/stone/brick/concrete): ");
-        String material = scanner.nextLine();
-
-        GridSquare square = grid.get(row).get(col);
-
-        Structure structure = BuildStructureOnGridSquare(square, floors, foundation, material);
+        GridSquare square = grid.get(row-1).get(col-1);
+        Structure structure = buildStructureOnGridSquare(square, floors, foundation, material);
 
         if (!structure.isBuildable()) {
-            System.out.println("\nCannot build: " + structure.getReason()+ "\n");
+            System.out.println("\nCannot build: " + structure.getReason()+"\n");
         } else {
             System.out.printf("\nStructure can be built. Total cost: $%,.2f\n", structure.getCost());
         }
     }
 
-    public Structure BuildStructureOnGridSquare(GridSquare square, int floors, String foundation, String material) {
+    public Structure buildStructureOnGridSquare(GridSquare square, int floors, String foundation, String material) {
         try {
-
+            
             Structure structure = new BaseStructure(floors, foundation, material);
 
             String terrain = square.getTerrain();
@@ -79,6 +158,9 @@ public class BuildStructure {
 
         } catch (NumberFormatException e) {
             System.out.println("Error: " + e.getMessage());
+            return null;
+        } catch (NullPointerException ne) {
+            System.out.println("Error: " + ne.getMessage());
             return null;
         }
     }
