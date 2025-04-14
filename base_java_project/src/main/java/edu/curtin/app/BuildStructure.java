@@ -73,7 +73,7 @@ public class BuildStructure {
 
         
         while(true) {
-            System.out.print("Foundation type \n(a)slab \n(b)stilts \nChoose option: ");
+            System.out.print("\nFoundation type \n(a)slab \n(b)stilts \nChoose option: ");
             String input = scanner.nextLine();
             switch(input) {
                 case "a":
@@ -90,7 +90,7 @@ public class BuildStructure {
         }
 
         while(true) {
-            System.out.print("Material type \n(a)wood \n(b)stone \n(c)brick \n(d)concrete \nChoose option: ");
+            System.out.print("\nMaterial type \n(a)wood \n(b)stone \n(c)brick \n(d)concrete \nChoose option: ");
             String input = scanner.nextLine();
             switch(input) {
                 case "a":

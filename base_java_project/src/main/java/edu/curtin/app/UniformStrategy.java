@@ -48,12 +48,12 @@ public class UniformStrategy implements BuildCityStrategy{
                 
             }
         }
-        System.out.printf("\nTotal structures can be built: %d\n", totalStructures);
+        System.out.printf("\nTotal structures can be built: %d", totalStructures);
     }
 
     @Override
     public void totalCost() {
-        System.out.printf("\nTotal cost: $%,.2f\n", totalCost);
+        System.out.printf("\nTotal cost: $%,.2f\n\n", totalCost);
       
     }
 

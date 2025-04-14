@@ -11,14 +11,19 @@ public class CityPlanningApp
 {
     public static void main(String[] args)
     {
-        new CityPlanningApp().run(new LoadGridFromFileIO());
+        if(args.length != 1) {
+            System.err.println("Provide grid data file");
+            System.exit(1);
+        }
+        String filename = args[0];
+        new CityPlanningApp().run(new LoadGridFromFileIO(filename));
     }
     
     public void run(LoadGridFromFileIO gridFileReader) {
         Util util = new Util();
         try {
             System.out.println("\nCity Planning App\n");
-            List<List<GridSquare>> grid = gridFileReader.readContents(LoadGridFromFileIO.GRID_FILE);
+            List<List<GridSquare>> grid = gridFileReader.readContents();
             util.displayGrid(grid);
             showMenu(grid);
         } catch (Exception e) {
@@ -51,9 +56,7 @@ public class CityPlanningApp
                     break;
 
                 case "c":
-                    
                     configure.configurationPrompt(grid);
-                    
                     break;
 
                 case "d":

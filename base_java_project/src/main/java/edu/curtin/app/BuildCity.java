@@ -16,7 +16,7 @@ public class BuildCity {
     Util util = new Util();
     
     public void build () {
-        System.out.println("\nBuild City\n");
+        System.out.println("\n\nBuild City");
         getStrategy().totalNumberOfStructures();
         getStrategy().totalCost();
         List<List<GridSquare>> grid = getStrategy().structuresCanBeBuilt();

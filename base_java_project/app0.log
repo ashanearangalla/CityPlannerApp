@@ -1,0 +1,9 @@
+Apr 14, 2025 4:56:14 PM java.lang.Shutdown logRuntimeExit
+FINE: Runtime.exit() called with status: 1
+java.lang.Throwable: Runtime.exit(1)
+	at java.base/java.lang.Shutdown.logRuntimeExit(Shutdown.java:179)
+	at java.base/java.lang.Shutdown.exit(Shutdown.java:160)
+	at java.base/java.lang.Runtime.exit(Runtime.java:188)
+	at java.base/java.lang.System.exit(System.java:1920)
+	at edu.curtin.app.CityPlanningApp.main(CityPlanningApp.java:16)
+
