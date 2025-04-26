@@ -9,32 +9,37 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Ashane
  */
 public class LoadGridFromFileIO {
+    private static final Logger logger = Logger.getLogger(LoadGridFromFileIO.class.getName());
     String filename;
 
     public LoadGridFromFileIO(String filename) {
         this.filename = filename;
     }
     
-
+    // Read Contents of the file
     public List<List<GridSquare>> readContents() throws FileParseException,
             IOException {
         int numRows, numCols;
 
+        // try ith resources
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String firstLine = reader.readLine().strip();
             String[] dimensions = firstLine.split(",");
+            // dimentions length should be 2
             if(dimensions.length != 2) {
                 throw new FileParseException("Invalid dimensions format. Expected format: 'rows, cols'");
             }
             try {
                 numRows = Integer.parseInt(dimensions[0].strip());
                 numCols = Integer.parseInt(dimensions[1].strip());
+                // rum of rows and columns should exceed 1
                 if(numRows < 1 || numCols < 1) {
                     throw new FileParseException("Dimensions must be positive integers");
                 }
@@ -57,6 +62,7 @@ public class LoadGridFromFileIO {
                             throw new FileParseException("Line is Empty");
                         }
 
+                        // Terrain should be oone below
                         if(!List.of("flat", "rocky", "swampy").contains(parts[0])){
                             throw new FileParseException("Invalid terrain type: "+ parts[0]);
                         }
@@ -123,7 +129,11 @@ public class LoadGridFromFileIO {
                 }
                 grid.add(rowList);
             }
+            logger.info("File successfully read");
             return grid;
+        }catch (Exception e) {
+            System.err.println("Exception" + e);
+            return null;
         }
 
     }

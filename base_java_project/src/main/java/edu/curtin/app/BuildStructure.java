@@ -7,12 +7,14 @@ package edu.curtin.app;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Ashane
  */
 public class BuildStructure {
+     private static final Logger logger = Logger.getLogger(BuildStructure.class.getName());
 
     public void buildStructurePrompt(List<List<GridSquare>> grid) {
         Scanner scanner = new Scanner(System.in);
@@ -20,6 +22,7 @@ public class BuildStructure {
         System.out.println("\n\nBuild Structure\n");
         int row, col, floors;
         String foundation, material;
+        // while loops are used to get the expected input
         while(true) {
             System.out.print("Enter row: ");
             String input = scanner.nextLine();
@@ -112,6 +115,7 @@ public class BuildStructure {
             break;
         }
 
+        // row-1 and col-1 is used because the rows, and columns we are getting from the user are starting from 1
         GridSquare square = grid.get(row-1).get(col-1);
         Structure structure = buildStructureOnGridSquare(square, floors, foundation, material);
 
@@ -124,12 +128,13 @@ public class BuildStructure {
 
     public Structure buildStructureOnGridSquare(GridSquare square, int floors, String foundation, String material) {
         try {
-            
+            // creation of base structure
             Structure structure = new BaseStructure(floors, foundation, material);
 
             String terrain = square.getTerrain();
             Map<String, String> zoning = square.getZoningRules();
 
+            // the base structure is wrapped accoring to terrin and zoning rules
             if ("swampy".equals(terrain)) {
                 structure = new SwampDecorator(structure, floors, material, foundation);
             }
@@ -153,7 +158,7 @@ public class BuildStructure {
             if (zoning.containsKey("height-limit")) {
                 structure = new HeightLimitDecorator(structure, floors, Integer.parseInt(zoning.get("height-limit")));
             }
-
+            logger.info("Structure is wrapped with decoraotrs");
             return structure;
 
         } catch (NumberFormatException e) {

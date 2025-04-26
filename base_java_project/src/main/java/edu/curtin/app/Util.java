@@ -6,13 +6,17 @@ package edu.curtin.app;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Ashane
  */
+// this class is used to display grids
 public class Util {
+    private static final Logger logger = Logger.getLogger(Util.class.getName());
     public void displayGrid(List<List<GridSquare>> grid) {
+        
         for (List<GridSquare> row : grid) {
             for (GridSquare square : row) {
                 System.out.print("+-------------+");
@@ -65,7 +69,7 @@ public class Util {
             }
             System.out.println();
         }        
-
+        logger.info("Grid displayed successfully");
     }
     
     
@@ -121,6 +125,7 @@ public class Util {
             }
             System.out.println();
         }        
-
+        logger.info("Grid displayed successfully");
     }
+    
 }

@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface BuildCityStrategy {
     
+    // guess how may structures can be built from selected strategy
     public void totalNumberOfStructures();
    
     public void totalCost();

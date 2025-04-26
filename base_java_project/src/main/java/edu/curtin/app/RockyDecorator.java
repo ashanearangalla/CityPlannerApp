@@ -4,14 +4,20 @@
  */
 package edu.curtin.app;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author Ashane
  */
+
+// rocky terrain
 public class RockyDecorator extends StructureDecorator{
+    private static final Logger logger = Logger.getLogger(RockyDecorator.class.getName());
     
     public RockyDecorator(Structure newStructure) {
         super(newStructure);
+        logger.info("Rocky decorator is added");
     }
     
     

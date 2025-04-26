@@ -15,6 +15,7 @@ public class BuildCity {
     private BuildCityStrategy strategy;
     Util util = new Util();
     
+    // build method which is responsible for building city using the previously set strategy
     public void build () {
         System.out.println("\n\nBuild City");
         getStrategy().totalNumberOfStructures();

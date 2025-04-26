@@ -6,6 +6,8 @@ package edu.curtin.app;
 
 import java.util.Map;
 
+
+
 /**
  *
  * @author Ashane
@@ -37,6 +39,8 @@ public class BaseStructure implements Structure{
     @Override
     public double getCost() {
         int costPerFloor = 0;
+        // swicth case to add basic cost for materials
+        
         switch(material) {
             case "wood":  
                 costPerFloor = 10000;

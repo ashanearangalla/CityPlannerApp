@@ -6,12 +6,16 @@ package edu.curtin.app;
 
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Ashane
  */
+
+// Build the city by randomly seclecting materials, foundatin and flloors
 public class RandomStrategy implements BuildCityStrategy{
+    private static final Logger logger = Logger.getLogger(RandomStrategy.class.getName());
     private List<List<GridSquare>> grid;
     private String[] materials = {"concrete", "brick", "stone", "wood"};
     private String[] foundations ={"slab", "stilts"};
@@ -22,6 +26,7 @@ public class RandomStrategy implements BuildCityStrategy{
         this.grid = grid;
         this.totalStructures = 0;
         this.totalCost = 0.00;
+        logger.info("Random Strategy is applied");
     }
 
     @Override

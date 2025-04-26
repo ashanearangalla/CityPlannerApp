@@ -4,18 +4,23 @@
  */
 package edu.curtin.app;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author Ashane
  */
 public class HeritageDecorator extends StructureDecorator{
+    private static final Logger logger = Logger.getLogger(HeritageDecorator.class.getName());
     private String heritage;
     private String material;
     private boolean buildable = true;
     private String reason = "";
     
     public HeritageDecorator(Structure newStructure, String material, String heritage) {
+        
         super(newStructure);
+        logger.info("HeritageDecorator added");
         this.material = material;
         this.heritage = heritage;
         
@@ -26,7 +31,7 @@ public class HeritageDecorator extends StructureDecorator{
             
         if(!(heritage).equals(material)) {
             buildable = false;
-            reason += "Heritage rule: must use"+ heritage + "as material instead of " + material;
+            reason += "Heritage rule: must use "+ heritage + " as material instead of " + material;
         }
 
         return tempStructure.isBuildable() && buildable;

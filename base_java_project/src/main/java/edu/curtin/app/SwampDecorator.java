@@ -4,12 +4,14 @@
  */
 package edu.curtin.app;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author Ashane
  */
 public class SwampDecorator extends StructureDecorator{
-    
+    private static final Logger logger = Logger.getLogger(SwampDecorator.class.getName());
     private String material;
     private String foundation;
     private int floors;
@@ -17,10 +19,12 @@ public class SwampDecorator extends StructureDecorator{
     private String reason = "";
     
     public SwampDecorator(Structure newStructure,int floors, String material, String foundation) {
+        
         super(newStructure);
         this.material = material;
         this.foundation = foundation;
         this.floors = floors;
+        logger.info("swamp decorator is added");
     }
     
     @Override

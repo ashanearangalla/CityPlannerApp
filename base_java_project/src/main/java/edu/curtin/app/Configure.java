@@ -15,6 +15,7 @@ public class Configure {
 
     BuildCity buildCity = new BuildCity();
 
+    // prompt to get user input
     public void configurationPrompt(List<List<GridSquare>> grid) {
         Scanner sc = new Scanner(System.in);
         int floors;
@@ -106,6 +107,7 @@ public class Configure {
         }
     }
 
+    // if no configuration is set random configuration is used
     public void randomConfiguration(List<List<GridSquare>> grid) {
         if (buildCity.getStrategy() == null) {
             buildCity.setStrategy(new RandomStrategy(grid));

@@ -1,17 +1,19 @@
 package edu.curtin.app;
 
 /**
- * Thrown when the services or customer request files are found to have invalid formatting.
+  Thrown when invalid fomatting found in files
  */
 public class FileParseException extends Exception
 {
     public FileParseException(String msg)
     {
-        super(msg);
+        System.out.println(msg);
+        System.exit(0);
     }
 
     public FileParseException(String msg, Throwable cause)
     {
-        super(msg, cause);
+        System.out.println(msg);
+        System.exit(0);
     }
 }

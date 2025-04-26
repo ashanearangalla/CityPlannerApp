@@ -7,6 +7,7 @@ package edu.curtin.app;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  *
  * @author Ashane
@@ -17,6 +18,7 @@ public class GridSquare {
     private String terrain;
     private Map<String, String> zoningRules;
     private boolean buildable;
+    // below attributes used when displaying built city
     private int floors;
     private String material;
     private String foundation;
@@ -24,6 +26,7 @@ public class GridSquare {
     public GridSquare(String terrain) {
         this.terrain = terrain;
         this.zoningRules = new HashMap<>();
+        
     }
     
     public String getTerrain() {

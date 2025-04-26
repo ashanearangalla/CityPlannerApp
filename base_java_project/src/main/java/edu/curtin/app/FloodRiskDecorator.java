@@ -4,19 +4,24 @@
  */
 package edu.curtin.app;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author Ashane
  */
 public class FloodRiskDecorator extends StructureDecorator{
+    private static final Logger logger = Logger.getLogger(FloodRiskDecorator.class.getName());
     private int floors;
     private int risk;
     private boolean buildable = true;
     private String reason = "";
     
-    
+    // Decorator class decorated thebase structure
     public FloodRiskDecorator(Structure newStructure, int risk, int floors) {
+        
         super(newStructure);
+        logger.info("Flood rick decorator applied");
         this.risk = risk;
         this.floors = floors;
     }

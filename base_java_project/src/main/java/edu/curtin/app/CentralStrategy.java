@@ -5,12 +5,14 @@
 package edu.curtin.app;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Ashane
  */
 public class CentralStrategy implements BuildCityStrategy{
+    private static final Logger logger = Logger.getLogger(CentralStrategy.class.getName());
     List<List<GridSquare>> grid;
     private int totalStructures;
     private double totalCost;
@@ -26,6 +28,8 @@ public class CentralStrategy implements BuildCityStrategy{
         int height = grid.size();
         int width = grid.get(0).size();
         
+        // calculations are based on the given equation
+        // first center of the grid is calculated
         double centerX = (height -1)/ 2.0;
         double centerY = (width -1) /2.0;
         
@@ -68,6 +72,7 @@ public class CentralStrategy implements BuildCityStrategy{
                 
             }
         }
+        logger.info("Central Strategy Successfully applied");
         System.out.printf("\nTotal structures can be built: %d", totalStructures);
     }
 

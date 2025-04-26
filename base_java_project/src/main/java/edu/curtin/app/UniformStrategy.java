@@ -5,12 +5,16 @@
 package edu.curtin.app;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Ashane
  */
+
+// Build the same structure in all units
 public class UniformStrategy implements BuildCityStrategy{
+    private static final Logger logger = Logger.getLogger(UniformStrategy.class.getName());
     private String material;
     private String foundation;
     List<List<GridSquare>> grid;
@@ -25,6 +29,7 @@ public class UniformStrategy implements BuildCityStrategy{
         this.grid = grid;
         this.totalStructures = 0;
         this.totalCost = 0.00;
+        logger.info("Uniform Strategy is added");
     }
 
     @Override

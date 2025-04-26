@@ -8,8 +8,10 @@ package edu.curtin.app;
  *
  * @author Ashane
  */
+// Abstract Decorator
 public abstract class StructureDecorator implements Structure{
     Structure tempStructure;
+    
     
     public StructureDecorator(Structure newStructure) {
         tempStructure = newStructure;

@@ -1,7 +1,9 @@
 package edu.curtin.app;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  * Entry point into the application. To chane the package, and/or the name of this class, make
@@ -9,12 +11,14 @@ import java.util.Scanner;
  */
 public class CityPlanningApp
 {
+    private static final Logger logger = Logger.getLogger(CityPlanningApp.class.getName());
     public static void main(String[] args)
     {
         if(args.length != 1) {
             System.err.println("Provide grid data file");
             System.exit(1);
         }
+        logger.info("Logger initialized");
         String filename = args[0];
         new CityPlanningApp().run(new LoadGridFromFileIO(filename));
     }
@@ -24,9 +28,10 @@ public class CityPlanningApp
         try {
             System.out.println("\nCity Planning App\n");
             List<List<GridSquare>> grid = gridFileReader.readContents();
+            logger.info("File info stored in list");
             util.displayGrid(grid);
             showMenu(grid);
-        } catch (Exception e) {
+        } catch (FileParseException | IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
     }
@@ -34,9 +39,10 @@ public class CityPlanningApp
     
     public static void showMenu(List<List<GridSquare>> grid) {
         
-       
         Scanner sc = new Scanner(System.in);
+        // same configure object is used therefore object is created on the top to avoid duplication
         Configure configure = new Configure();
+        BuildStructure buildStructure;
         
         boolean done = false;
         while(!done){
@@ -47,8 +53,9 @@ public class CityPlanningApp
             String opt = sc.nextLine();
             switch(opt) {
                 case "a":
-                    BuildStructure buildStructure = new BuildStructure();
+                    buildStructure = new BuildStructure();
                     buildStructure.buildStructurePrompt(grid);
+                    
                     break;
 
                 case "b":

@@ -10,10 +10,13 @@ package edu.curtin.app;
  */
 public interface Structure {
     
+    // checks wheteher structure is buildable
     public boolean isBuildable();
     
+    // display reason
     public String getReason();
     
+    // get cost
     public double getCost();
     
     
